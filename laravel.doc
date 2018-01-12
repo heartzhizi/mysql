@@ -1,0 +1,13 @@
+                                               laravel生命周期
+1.  所有的请求入口都是public/index.php
+2.  index.php最重要的作用就是加载了composer定义的类似Java中类加载器，用来加载类实例，就是我们程序中new Object（），此时就使用类加载器加载实例了；
+并且生成 service container（服务容器）；
+3.  服务提供者调用register方法注册到服务容器，说白了就是生成组件实例，这个在config/app.php的providers数组中，使用make解析或者构造函数参数类型提示
+或者变量类型提示等，这特像spring里面的东西，就是你在配置文件里面或者使用注解指定注册到容器里的类，那使用的时候依赖注入而不需要自己new Object（）。
+4.  Http/Kenerl.php想象成一个黑盒子，http请求进来，出去response；
+5.  那laravel中服务提供器像Spring里面的注解或者配置文件，就是把类绑定到容器里面；嗯，然后我们需要把服务提供器添加到config/app.php的providers
+数组里面。
+6.  Facades,就是服务容器里面一些底层类的静态接口，可以直接使用；其实质就是实现了Facades类，并在函数getFacadeAccessor（）得到服务容器里的对应对象。
+反正实质还是使用注册到服务容器里的对象，跟使用$this->app没啥区别
+7.  contracts，嗯，其实就是一组接口，在写一个实现类，然后将服务提供器的register方法里面绑定接口和实现类，最后将服务提供器放到providers数组就可以
+使用该对象；
