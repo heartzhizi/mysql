@@ -34,6 +34,8 @@
         就是where和order by可以形成最左前缀的话可以使用索引，如果没有形成最左前缀，仍然不能使用索引。
      3.3    mysiam压缩索引
         可以压缩字符串索引，就是以第一个值为根据，其他往后的值：整数+后缀，比如第一个值是perform，第二个是performance，那可以记为7，ance；
+4   索引使用总结
+    http://blog.csdn.net/bigtree_3721/article/details/51340640     
         
 
 第四章
