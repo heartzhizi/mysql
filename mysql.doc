@@ -49,7 +49,28 @@
   3.1 双路排序：就是根据行指针和order by 那列进行排序，然后根据排序结果再依次从表中读取数据；需要读表两次
   3.2 单路排序：就是把所有的结果列读取到内存里面，然后在进行排序，这个耗内存；
 4.  子查询
-    select * from students  where id in （select id from  teachers）；
-    上面这条语句不是先执行子查询，在执行外查询，而是 selec * from studens where exists （select * from teachers where teachers.id = studnets.id）；
-    子查询效率并不高，使用的时候要注意；  
-
+    select id from students  where id in （select id from  teachers）；
+    上面这条语句不是先执行子查询，在执行外查询，而是 selec id from studens where exists （select * from teachers where teachers.id = studnets.id）；
+    子查询效率并不高，使用的时候要注意；类似于
+        for（students的id）{
+            for（teachers的id）{
+                if(students.id == teachers.id)
+                    返回id；
+            }
+        }
+     selec id from studens where not exists （select * from teachers where teachers.id = studnets.id）not exists类似于
+        for（students[i].id）{
+            for(teachers[j].id){
+                    if(students[i].id == teachers[j].id)
+                        放弃该id
+            }
+        }
+      
+    就是students的id和teachers的ID都不相等才符合条件；
+    
+    
+    
+    
+    
+    
+    
